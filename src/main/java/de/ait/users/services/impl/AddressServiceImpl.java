@@ -7,6 +7,7 @@ import de.ait.users.services.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,8 +57,17 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void delete(Long id) {
-
+        // Проверяем, существует ли адрес с указанным идентификатором
+        Optional<Address> optionalAddress = repository.findById(id);
+        if (optionalAddress.isPresent()) {
+            // Если адрес существует, удаляем его
+            repository.delete(id);
+        } else {
+            // Если адрес не найден, бросаем исключение или обрабатываем ситуацию
+            throw new EntityNotFoundException("Адрес с id: " + id + " не найден.");
+        }
     }
+
 
     @Override
     public void update(Long id, AddressRequestDTO updatedAddress) {
@@ -65,7 +75,6 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address save(AddressRequestDTO addressRequestDTO) {
-        return null;
-    }
+    public void save(AddressRequestDTO addressRequestDTO) {
+            }
 }

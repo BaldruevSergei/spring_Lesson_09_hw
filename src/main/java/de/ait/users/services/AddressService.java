@@ -24,7 +24,7 @@ public  interface AddressService {
 
     void update(Long id, AddressRequestDTO updatedAddress);
 
-    Address save(AddressRequestDTO addressRequestDTO);
+    void save(AddressRequestDTO addressRequestDTO);
 
 
     List<Address> findByCityAndStreetContaining(String city, String street);

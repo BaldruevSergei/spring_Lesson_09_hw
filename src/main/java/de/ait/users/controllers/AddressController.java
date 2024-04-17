@@ -26,8 +26,13 @@ public class AddressController {
     }
 
     @GetMapping("/address/{id}")
-    public Address findById(@PathVariable Long id) {
-        return service.findById(id).get();
+    public ResponseEntity<Address> findById(@PathVariable Long id) {
+        Optional<Address> optionalAddress = service.findById(id);
+        if (optionalAddress.isPresent()) {
+            return ResponseEntity.ok(optionalAddress.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/address/country/{country}")
@@ -55,6 +60,14 @@ public class AddressController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No addresses found for street: " + street);
         }
         return addresses;
+    }
+
+    @GetMapping("/addresses/search")
+    public List<Address> findByCityAndStreetContaining(
+            @RequestParam("city") String city,
+            @RequestParam("street") String street
+    ) {
+        return service.findByCityAndStreetContaining(city, street);
     }
 
     @PostMapping("/address/add")

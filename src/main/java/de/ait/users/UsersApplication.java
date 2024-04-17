@@ -8,6 +8,7 @@ GET  /users/{userID}
 
  */
 
+import de.ait.users.controllers.AddressController;
 import de.ait.users.controllers.UserController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +22,7 @@ public class UsersApplication {
 		ConfigurableApplicationContext context = SpringApplication.run(UsersApplication.class, args);
 
 		// получить бин из контекста
-		UserController controller = context.getBean(UserController.class);
+		AddressController controller = context.getBean(AddressController.class);
 		//System.out.println(controller.getAllUsers(0,"klod"));
 
 	}

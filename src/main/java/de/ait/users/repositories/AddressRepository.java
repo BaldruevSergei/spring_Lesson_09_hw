@@ -15,7 +15,9 @@ public interface AddressRepository {
     List<Address> findByCityAndStreetContaining(String city, String street);
     AddressRepository add(AddressRequestDTO adress);
     Address save(Address address);
+
     void delete(Long id);
+
     void update(Long id, AddressRequestDTO addressRequestDTO);
 
 

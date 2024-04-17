@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Repository
+
 public class AddressRepositoryImpl implements AddressRepository {
 
     private List<Address> addressList = new ArrayList<>(List.of(
@@ -107,7 +107,7 @@ public class AddressRepositoryImpl implements AddressRepository {
     @Override
     public Optional<Address> findById(Long id) {
         return addressList.stream()
-                .filter(a->a.getId().equals(id))
+                .filter(a -> a.getId().equals(id))
                 .findAny();
     }
 
@@ -154,13 +154,13 @@ public class AddressRepositoryImpl implements AddressRepository {
         return address;
     }
 
-
-
     @Override
     public void delete(Long id) {
-        addressList.removeIf(i->i.getId().equals(id));
+        addressList.removeIf(a->a.getId().equals(id));
 
     }
+
+
     @Override
     public void update(Long id, AddressRequestDTO addressRequestDTO) {
         Optional<Address> optionalAddress = findById(id);
